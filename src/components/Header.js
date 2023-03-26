@@ -97,6 +97,18 @@ const Header = () => {
               Logout
             </Button>
           )}
+          {isLoggedIn && (
+            <Button
+              onClick={() => dispath(authActions.logout())}
+              LinkComponent={Link}
+              to="/auth"
+              variant="contained"
+              sx={{ margin: 1, borderRadius: 10 }}
+              color="warning"
+            >
+              Profile
+            </Button>
+          )}
         </Box>
       </Toolbar>
     </AppBar>
