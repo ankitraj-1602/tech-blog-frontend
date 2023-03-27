@@ -13,7 +13,7 @@ const Auth = () => {
     email: "",
     password: "",
   });
-  const [isSignup, setIsSignup] = useState(false);
+  const [isSignup, setIsSignup] = useState(true);
   const handleChange = (e) => {
     setInputs((prevState) => ({
       ...prevState,
@@ -21,7 +21,9 @@ const Auth = () => {
     }));
   };
   const sendRequest = async (type = "login") => {
+    console.log(type)
     const res = await axios
+
       .post(`http://localhost:5000/api/user/${type}`, {
         name: inputs.name,
         email: inputs.email,
@@ -38,15 +40,17 @@ const Auth = () => {
     e.preventDefault();
     console.log(inputs);
     if (isSignup) {
+    
       sendRequest("signup")
-        .then((data) => localStorage.setItem("userId", data.user._id))
+        .then((data) => console.log(data))
         .then(() => dispath(authActions.login()))
-        .then(() => naviagte("/blogs"));
+        .then(() => naviagte("/blog"));
+        
     } else {
       sendRequest()
         .then((data) => localStorage.setItem("userId", data.user._id))
         .then(() => dispath(authActions.login()))
-        .then(() => naviagte("/blogs"));
+        .then(() => naviagte("/blog"));
     }
   };
   return (
